@@ -1,11 +1,21 @@
-import React from "react";
-import "./style.css";
+import * as React from 'react';
+import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 
-export default function App() {
+import Header from './components/Header';
+import Auth from './components/Auth';
+import UserProfile from './components/UserProfile';
+
+function App() {
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+
   return (
-    <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
-    </div>
+    <Fragment>
+      <Header />
+      {!isAuth && <Auth />}
+      {isAuth && <UserProfile />}
+    </Fragment>
   );
 }
+
+export default App;
